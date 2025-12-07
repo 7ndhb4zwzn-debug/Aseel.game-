@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chase Game</title>
+<style>
+    body { text-align:center; font-family:Arial; margin-top:15px; }
+    #game {
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        background: #eee;
+        position: relative;
+        border: 2px solid #333;
+    }
+    #player, #enemy {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        border-radius: 5px;
+    }
+    #player { background: green; }
+    #enemy { background: red; }
+
+    /* أزرار التحكم */
+    .controls {
+        margin-top: 20px;
+    }
+    .btn {
+        width: 60px;
+        height: 40px;
+        background: #ddd;
+        border: 1px solid #333;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h1>لعبة الهروب 🔥</h1>
+<p>اهرب من المربع الأحمر لمدة 10 ثواني!</p>
+
+<div id="game">
+    <div id="player"></div>
+    <div id="enemy"></div>
+</div>
+
+<h2 id="result"></h2>
+
+<div class="controls">
+    <button class="btn" onclick="move(0,-10)">▲</button><br>
+    <button class="btn" onclick="move(-10,0)">◀</button>
+    <button class="btn" onclick="move(10,0)">▶</button><br>
+    <button class="btn" onclick="move(0,10)">▼</button>
+</div>
+
+<script>
+let player = document.getElementById("player");
+let enemy = document.getElementById("enemy");
+let result = document.getElementById("result");
+
+let px = 10, py = 10;
+let ex = 250, ey = 250;
+
+// تحريك اللاعب
+function move(dx, dy) {
+    px += dx;
+    py += dy;
+
+    px = Math.max(0, Math.min(270, px));
+    py = Math.max(0, Math.min(270, py));
+
+    player.style.left = px + "px";
+    player.style.top = py + "px";
+}
+
+// تحريك العدو
+let chase = setInterval(() => {
+    if (px > ex) ex += 2.5;
+    if (px < ex) ex -= 2.5;
+    if (py > ey) ey += 2.5;
+    if (py < ey) ey -= 2.5;
+
+    enemy.style.left = ex + "px";
+    enemy.style.top = ey + "px";
+
+    if (Math.abs(px - ex) < 25 && Math.abs(py - ey) < 25) {
+        clearInterval(chase);
+        clearTimeout(winTimer);
+        result.innerHTML = "Game Over 😭";
+    }
+}, 50);
+
+// الفوز
+let winTimer = setTimeout(() => {
+    clearInterval(chase);
+    result.innerHTML = "You Win! 🎉🔥";
+}, 10000);
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Chase Game</title>
+<style>
+    body { text-align:center; font-family:Arial; margin-top:15px; }
+    #game {
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        background: #eee;
+        position: relative;
+        border: 2px solid #333;
+    }
+    #player, #enemy {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        border-radius: 5px;
+    }
+    #player { background: green; }
+    #enemy { background: red; }
+
+    /* أزرار التحكم */
+    .controls {
+        margin-top: 20px;
+    }
+    .btn {
+        width: 60px;
+        height: 40px;
+        background: #ddd;
+        border: 1px solid #333;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h1>لعبة الهروب 🔥</h1>
+<p>اهرب من المربع الأحمر لمدة 10 ثواني!</p>
+
+<div id="game">
+    <div id="player"></div>
+    <div id="enemy"></div>
+</div>
+
+<h2 id="result"></h2>
+
+<div class="controls">
+    <button class="btn" onclick="move(0,-10)">▲</button><br>
+    <button class="btn" onclick="move(-10,0)">◀</button>
+    <button class="btn" onclick="move(10,0)">▶</button><br>
+    <button class="btn" onclick="move(0,10)">▼</button>
+</div>
+
+<script>
+let player = document.getElementById("player");
+let enemy = document.getElementById("enemy");
+let result = document.getElementById("result");
+
+let px = 10, py = 10;
+let ex = 250, ey = 250;
+
+// تحريك اللاعب
+function move(dx, dy) {
+    px += dx;
+    py += dy;
+
+    px = Math.max(0, Math.min(270, px));
+    py = Math.max(0, Math.min(270, py));
+
+    player.style.left = px + "px";
+    player.style.top = py + "px";
+}
+
+// تحريك العدو
+let chase = setInterval(() => {
+    if (px > ex) ex += 2.5;
+    if (px < ex) ex -= 2.5;
+    if (py > ey) ey += 2.5;
+    if (py < ey) ey -= 2.5;
+
+    enemy.style.left = ex + "px";
+    enemy.style.top = ey + "px";
+
+    if (Math.abs(px - ex) < 25 && Math.abs(py - ey) < 25) {
+        clearInterval(chase);
+        clearTimeout(winTimer);
+        result.innerHTML = "Game Over 😭";
+    }
+}, 50);
+
+// الفوز
+let winTimer = setTimeout(() => {
+    clearInterval(chase);
+    result.innerHTML = "You Win! 🎉🔥";
+}, 10000);
+</script>
+
+</body>
+</html>
